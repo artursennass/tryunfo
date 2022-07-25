@@ -9,15 +9,15 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
-      // onSaveButtonClick: ,
+      saveButtonClickArray: [],
     };
   }
 
@@ -74,6 +74,46 @@ class App extends React.Component {
     }, () => this.enableSaveButton());
   }
 
+  // resetForm = () =>
+
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+
+    const currentCardObj = {
+      cardName: [cardName],
+      cardDescription: [cardDescription],
+      cardAttr1: [cardAttr1],
+      cardAttr2: [cardAttr2],
+      cardAttr3: [cardAttr3],
+      cardImage: [cardImage],
+      cardRare: [cardRare],
+    };
+
+    this.setState((prevState) => ({
+      saveButtonClickArray: [...prevState.saveButtonClickArray, currentCardObj],
+    }), () => this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      hasTrunfo: false,
+      isSaveButtonDisabled: true,
+    }));
+  }
+
   render() {
     return (
       <div>
@@ -81,7 +121,7 @@ class App extends React.Component {
         <Form
           { ...this.state }
           onInputChange={ this.onInputChange }
-          // onSaveButtonClick={ callback }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <h2>Cartas do baralho:</h2>
         <Card { ...this.state } />

@@ -3,54 +3,44 @@ import Form from './components/Form';
 import Card from './components/Card';
 
 class App extends React.Component {
-  // constructor() {
-  //   super();
+  constructor() {
+    super();
 
-  //   this.state = {
-  //     cardName: ,
-  //         cardDescription: ,
-  //         cardAttr1: ,
-  //         cardAttr2: ,
-  //         cardAttr3: ,
-  //         cardImage: ,
-  //         cardRare: ,
-  //         cardTrunfo: ,
-  //         hasTrunfo: ,
-  //         isSaveButtonDisabled: ,
-  //         onInputChange: ,
-  //         onSaveButtonClick: ,
-  //   };
-  // }
+    this.state = {
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      hasTrunfo: false,
+      isSaveButtonDisabled: false,
+      // onSaveButtonClick: ,
+    };
+  }
+
+  onInputChange = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      [name]: value,
+    });
+  }
 
   render() {
     return (
       <div>
         <h1>Tryunfo</h1>
         <Form
-          cardName=""
-          cardDescription=""
-          cardAttr1=""
-          cardAttr2=""
-          cardAttr3=""
-          cardImage=""
-          cardRare=""
-          cardTrunfo={ false }
-          hasTrunfo={ false }
-          isSaveButtonDisabled={ false }
-          // onInputChange={ callback }
+          { ...this.state }
+          onInputChange={ this.onInputChange }
           // onSaveButtonClick={ callback }
         />
         <h2>Cartas do baralho:</h2>
-        <Card
-          cardName=""
-          cardDescription=""
-          cardAttr1=""
-          cardAttr2=""
-          cardAttr3=""
-          cardImage=""
-          cardRare=""
-          cardTrunfo={ false }
-        />
+        <Card { ...this.state } />
       </div>
     );
   }

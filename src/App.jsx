@@ -88,14 +88,14 @@ class App extends React.Component {
     } = this.state;
 
     const currentCardObj = {
-      cardName: [cardName],
-      cardDescription: [cardDescription],
-      cardAttr1: [cardAttr1],
-      cardAttr2: [cardAttr2],
-      cardAttr3: [cardAttr3],
-      cardImage: [cardImage],
-      cardRare: [cardRare],
-      cardTrunfo: [cardTrunfo],
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
     };
 
     this.setState((prevState) => ({
@@ -120,16 +120,25 @@ class App extends React.Component {
   }
 
   render() {
+    const { saveButtonClickArray } = this.state;
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <Form
-          { ...this.state }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <h2>Cartas do baralho:</h2>
-        <Card { ...this.state } />
+        <header>
+          <h1>Tryunfo</h1>
+        </header>
+        <section>
+          <Form
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
+          <h2>Cartas do baralho:</h2>
+          <Card { ...this.state } />
+        </section>
+        <section>
+          <h2>Baralho Atual:</h2>
+          {saveButtonClickArray.map((e, i) => <Card { ...e } key={ e.cardName + i } />) }
+        </section>
       </div>
     );
   }

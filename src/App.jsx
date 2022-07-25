@@ -74,8 +74,6 @@ class App extends React.Component {
     }, () => this.enableSaveButton());
   }
 
-  // resetForm = () =>
-
   onSaveButtonClick = (event) => {
     event.preventDefault();
     const {
@@ -86,6 +84,7 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
+      cardTrunfo,
     } = this.state;
 
     const currentCardObj = {
@@ -96,6 +95,7 @@ class App extends React.Component {
       cardAttr3: [cardAttr3],
       cardImage: [cardImage],
       cardRare: [cardRare],
+      cardTrunfo: [cardTrunfo],
     };
 
     this.setState((prevState) => ({
@@ -109,9 +109,14 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
-      hasTrunfo: false,
       isSaveButtonDisabled: true,
     }));
+
+    if (cardTrunfo === true) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
   }
 
   render() {

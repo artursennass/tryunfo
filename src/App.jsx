@@ -119,6 +119,22 @@ class App extends React.Component {
     }
   }
 
+  deleteThisCard = (thisCardName, thisCardDesc, isTrunfo) => {
+    const { saveButtonClickArray } = this.state;
+    const newDeletedArray = saveButtonClickArray
+      .filter((e) => e.cardName !== thisCardName && e.cardDescription !== thisCardDesc);
+
+    this.setState({
+      saveButtonClickArray: newDeletedArray,
+    });
+
+    if (isTrunfo) {
+      this.setState({
+        hasTrunfo: false,
+      });
+    }
+  }
+
   render() {
     const { saveButtonClickArray } = this.state;
     return (
@@ -137,7 +153,24 @@ class App extends React.Component {
         </section>
         <section>
           <h2>Baralho Atual:</h2>
-          {saveButtonClickArray.map((e, i) => <Card { ...e } key={ e.cardName + i } />) }
+          {saveButtonClickArray.map((e, i) => {
+            const thisCardId = e.cardName + i;
+            return (
+              <div key={ thisCardId }>
+                <Card { ...e } id={ thisCardId } />
+                <button
+                  type="button"
+                  data-testid="delete-button"
+                  onClick={
+                    () => this.deleteThisCard(e.cardName, e.cardDescription, e.cardTrunfo)
+                  }
+                  // essa estrutura de usar uma função anonima dentro do onClick eu peguei em: https://stackoverflow.com/questions/37387351/reactjs-warning-setstate-cannot-update-during-an-existing-state-transiti
+                >
+                  Excluir
+                </button>
+              </div>
+            );
+          }) }
         </section>
       </div>
     );

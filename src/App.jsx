@@ -16,9 +16,53 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
-      isSaveButtonDisabled: false,
+      isSaveButtonDisabled: true,
       // onSaveButtonClick: ,
     };
+  }
+
+  enableSaveButton = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      // cardRare,
+    } = this.state;
+
+    const atributeTotalMax = 210;
+    const atributeMax = 90;
+
+    console.log(Number(cardAttr1) < 0);
+    // console.log(Number(cardAttr2));
+    // console.log(Number(cardAttr3));
+    // console.log(Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3));
+
+    if (
+      cardName.length !== 0
+        && cardDescription.length !== 0
+        && cardImage.length !== 0
+        && Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= atributeTotalMax
+        && Number(cardAttr1) <= atributeMax
+        && Number(cardAttr2) <= atributeMax
+        && Number(cardAttr3) <= atributeMax
+        && (Math.sign(Number(cardAttr1)) === 1 || Math.sign(Number(cardAttr1)) === 0)
+        && (Math.sign(Number(cardAttr2)) === 1 || Math.sign(Number(cardAttr2)) === 0)
+        && (Math.sign(Number(cardAttr3)) === 1 || Math.sign(Number(cardAttr3)) === 0)
+        // && Number(cardAttr1) > 0
+        // && Number(cardAttr2) > 0
+        // && Number(cardAttr3) > 0
+    ) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
+      });
+    }
   }
 
   onInputChange = ({ target }) => {
@@ -27,7 +71,7 @@ class App extends React.Component {
 
     this.setState({
       [name]: value,
-    });
+    }, () => this.enableSaveButton());
   }
 
   render() {

@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Card extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-
-    };
-  }
-
   render() {
     const {
       cardName,
@@ -31,7 +23,8 @@ export default class Card extends Component {
         <p data-testid="attr2-card">{ cardAttr2 }</p>
         <p data-testid="attr3-card">{ cardAttr3 }</p>
         <h4 data-testid="rare-card">{ cardRare }</h4>
-        <h4 data-testid="trunfo-card" disabled={ cardTrunfo === false }>Super Trunfo</h4>
+        {/* <h4 data-testid="trunfo-card" hidden={ cardTrunfo === false }>Super Trunfo</h4> */}
+        {cardTrunfo && <h4 data-testid="trunfo-card">Super Trunfo</h4>}
       </div>
     );
   }

@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Form extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-
-    };
-  }
-
   render() {
     const {
       cardName,
@@ -119,7 +111,7 @@ export default class Form extends Component {
           >
             <option value="normal">Normal</option>
             <option value="raro">Raro</option>
-            <option value="muito-raro">Muito raro</option>
+            <option value="muito raro">Muito raro</option>
           </select>
         </label>
         <br />
@@ -128,8 +120,8 @@ export default class Form extends Component {
             type="checkbox"
             name="isSuper"
             id="isSuper"
-            ata-testid="trunfo-input"
-            value={ cardTrunfo }
+            data-testid="trunfo-input"
+            checked={ cardTrunfo }
             onChange={ onInputChange }
           />
           Super Trybe Trunfo
@@ -142,7 +134,6 @@ export default class Form extends Component {
           onClick={ onSaveButtonClick }
         >
           Salvar
-
         </button>
       </form>
     );

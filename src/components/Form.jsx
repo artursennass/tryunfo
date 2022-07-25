@@ -25,6 +25,7 @@ export default class Form extends Component {
       onInputChange,
       onSaveButtonClick,
     } = this.props;
+
     return (
       <form action="">
         <label htmlFor="name">

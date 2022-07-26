@@ -119,7 +119,18 @@ class App extends React.Component {
     }
   }
 
-  deleteThisCard = (thisCardName, thisCardDesc, isTrunfo) => {
+  filterSaveButtonClickArray = (event) => {
+    const { value } = event.target;
+    const { saveButtonClickArray } = this.state;
+    const filteredSaveButtonClickArray = saveButtonClickArray
+      .filter((e) => e.cardName.includes(value));
+
+    this.setState({
+      saveButtonClickArray: filteredSaveButtonClickArray,
+    });
+  }
+
+  delThisCard = (thisCardName, thisCardDesc, isTrunfo) => {
     const { saveButtonClickArray } = this.state;
     const newDeletedArray = saveButtonClickArray
       .filter((e) => e.cardName !== thisCardName && e.cardDescription !== thisCardDesc);
@@ -153,24 +164,39 @@ class App extends React.Component {
         </section>
         <section>
           <h2>Baralho Atual:</h2>
-          {saveButtonClickArray.map((e, i) => {
-            const thisCardId = e.cardName + i;
-            return (
-              <div key={ thisCardId }>
-                <Card { ...e } id={ thisCardId } />
-                <button
-                  type="button"
-                  data-testid="delete-button"
-                  onClick={
-                    () => this.deleteThisCard(e.cardName, e.cardDescription, e.cardTrunfo)
-                  }
+          <div>
+            <label htmlFor="search">
+              Filtros de busca
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Nome da carta"
+                data-testid="name-filter"
+                onChange={ this.filterSaveButtonClickArray }
+              />
+            </label>
+          </div>
+          <div>
+            {saveButtonClickArray.map((e, i) => {
+              const thisCardId = e.cardName + i;
+              return (
+                <div key={ thisCardId }>
+                  <Card { ...e } id={ thisCardId } />
+                  <button
+                    type="button"
+                    data-testid="delete-button"
+                    onClick={
+                      () => this.delThisCard(e.cardName, e.cardDescription, e.cardTrunfo)
+                    }
                   // essa estrutura de usar uma função anonima dentro do onClick eu peguei em: https://stackoverflow.com/questions/37387351/reactjs-warning-setstate-cannot-update-during-an-existing-state-transiti
-                >
-                  Excluir
-                </button>
-              </div>
-            );
-          }) }
+                  >
+                    Excluir
+                  </button>
+                </div>
+              );
+            }) }
+          </div>
         </section>
       </div>
     );

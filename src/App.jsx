@@ -1,6 +1,8 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import SearchForm from './components/SearchForm';
+import DeckCompiler from './components/DeckCompiler';
 
 class App extends React.Component {
   constructor() {
@@ -18,6 +20,10 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       saveButtonClickArray: [],
+      // saveButtonClickArrayFiltered: [],
+      searchByName: '',
+      searchByRarity: '',
+      searchSuper: false,
     };
   }
 
@@ -29,16 +35,10 @@ class App extends React.Component {
       cardAttr2,
       cardAttr3,
       cardImage,
-      // cardRare,
     } = this.state;
 
     const atributeTotalMax = 210;
     const atributeMax = 90;
-
-    console.log(Number(cardAttr1) < 0);
-    // console.log(Number(cardAttr2));
-    // console.log(Number(cardAttr3));
-    // console.log(Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3));
 
     if (
       cardName.length !== 0
@@ -51,9 +51,6 @@ class App extends React.Component {
         && (Math.sign(Number(cardAttr1)) === 1 || Math.sign(Number(cardAttr1)) === 0)
         && (Math.sign(Number(cardAttr2)) === 1 || Math.sign(Number(cardAttr2)) === 0)
         && (Math.sign(Number(cardAttr3)) === 1 || Math.sign(Number(cardAttr3)) === 0)
-        // && Number(cardAttr1) > 0
-        // && Number(cardAttr2) > 0
-        // && Number(cardAttr3) > 0
     ) {
       this.setState({
         isSaveButtonDisabled: false,
@@ -100,6 +97,7 @@ class App extends React.Component {
 
     this.setState((prevState) => ({
       saveButtonClickArray: [...prevState.saveButtonClickArray, currentCardObj],
+      saveButtonClickArrayFiltered: [...prevState.saveButtonClickArray, currentCardObj],
     }), () => this.setState({
       cardName: '',
       cardDescription: '',
@@ -110,6 +108,7 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+      trunfoFilter: false,
     }));
 
     if (cardTrunfo === true) {
@@ -119,16 +118,47 @@ class App extends React.Component {
     }
   }
 
-  filterSaveButtonClickArray = (event) => {
-    const { value } = event.target;
-    const { saveButtonClickArray } = this.state;
-    const filteredSaveButtonClickArray = saveButtonClickArray
-      .filter((e) => e.cardName.includes(value));
+  // filterSaveButtonClickArray = () => {
+  //   const { saveButtonClickArray,
+  //     saveButtonClickArrayFiltered,
+  //     searchByName,
+  //     searchByRarity,
+  //     searchSuper } = this.state;
 
-    this.setState({
-      saveButtonClickArray: filteredSaveButtonClickArray,
-    });
-  }
+  //   // console.log(saveButtonClickArrayFiltered);
+  //   // ajuda de guydoo e hugo leonardo
+  //   const filteredSaveButtonClickArrayByName = saveButtonClickArrayFiltered
+  //     .filter((e) => ((searchByName.length === 0)
+  //       ? true : e.cardName.includes(searchByName)));
+
+  //   const filteredSaveButtonClickArrayByRare = filteredSaveButtonClickArrayByName
+  //     .filter((e) => e.cardRare === searchByRarity);
+
+  //   const filteredSaveButtonClickArraySuper = saveButtonClickArrayFiltered
+  //     .filter((e) => e.cardTrunfo === true);
+
+  //   if (searchSuper) {
+  //     this.setState({
+  //       saveButtonClickArrayFiltered: filteredSaveButtonClickArraySuper,
+  //     });
+  //     return;
+  //   }
+  //   if (searchByRarity === 'todas') {
+  //     if (searchByName.length > 0) {
+  //       this.setState({
+  //         saveButtonClickArrayFiltered: filteredSaveButtonClickArrayByName,
+  //       });
+  //       return;
+  //     }
+  //     this.setState({
+  //       saveButtonClickArrayFiltered: saveButtonClickArray,
+  //     });
+  //     return;
+  //   }
+  //   this.setState({
+  //     saveButtonClickArrayFiltered: filteredSaveButtonClickArrayByRare,
+  //   });
+  // }
 
   delThisCard = (thisCardName, thisCardDesc, isTrunfo) => {
     const { saveButtonClickArray } = this.state;
@@ -147,7 +177,21 @@ class App extends React.Component {
   }
 
   render() {
-    const { saveButtonClickArray } = this.state;
+    const { saveButtonClickArray,
+      searchByName,
+      searchByRarity,
+      searchSuper } = this.state;
+
+    console.log(searchSuper);
+
+    const filteredSaveButtonClickArray = saveButtonClickArray
+      .filter((e) => (searchSuper
+        ? e.cardTrunfo === true : true))
+      .filter((e) => (searchByName.length === 0
+        ? true : e.cardName.includes(searchByName)))
+      .filter((e) => (searchByRarity === 'todas' || searchByRarity === ''
+        ? true : e.cardRare === searchByRarity));
+
     return (
       <div>
         <header>
@@ -164,39 +208,13 @@ class App extends React.Component {
         </section>
         <section>
           <h2>Baralho Atual:</h2>
-          <div>
-            <label htmlFor="search">
-              Filtros de busca
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Nome da carta"
-                data-testid="name-filter"
-                onChange={ this.filterSaveButtonClickArray }
-              />
-            </label>
-          </div>
-          <div>
-            {saveButtonClickArray.map((e, i) => {
-              const thisCardId = e.cardName + i;
-              return (
-                <div key={ thisCardId }>
-                  <Card { ...e } id={ thisCardId } />
-                  <button
-                    type="button"
-                    data-testid="delete-button"
-                    onClick={
-                      () => this.delThisCard(e.cardName, e.cardDescription, e.cardTrunfo)
-                    }
-                  // essa estrutura de usar uma função anonima dentro do onClick eu peguei em: https://stackoverflow.com/questions/37387351/reactjs-warning-setstate-cannot-update-during-an-existing-state-transiti
-                  >
-                    Excluir
-                  </button>
-                </div>
-              );
-            }) }
-          </div>
+          <SearchForm
+            onInputChange={ this.onInputChange }
+            searchByName={ searchByName }
+            searchByRarity={ searchByRarity }
+            searchSuper={ searchSuper }
+          />
+          <DeckCompiler filteredSaveButtonClickArray={ filteredSaveButtonClickArray } />
         </section>
       </div>
     );

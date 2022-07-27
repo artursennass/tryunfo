@@ -1,4 +1,16 @@
+/* @import-normalize;  */
+/* bring in normalize.css styles */
+#root {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
 body {
+  line-height: 1;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,3 +23,229 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card-container {
+  border: 1px solid black;
+  width: 500px;
+  height: 700px;
+  margin: 0 auto;
+  margin-top: 56px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  box-shadow: -8px 9px 16px -3px gray;
+  /*background: #171314; */
+ }
+
+ .card-background {
+  height: 600px;
+  margin: 20px 20px 0 20px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 8%;
+  border-bottom-right-radius: 8%;
+  background-color: #bbb;
+ }
+
+ .card-container {
+  background: #171314;
+ }
+
+ .card-background {
+  z-index: 0;
+ }
+
+/*
+ — — — — — — — — — — — — -
+ — — — — — — — — — — — — -
+ BORDERS
+ — — — — — — — — — — — — -
+ — — — — — — — — — — — — -
+*/
+.frame-header,
+.frame-type-line {
+ border-bottom: 4px solid #a9a9a9;
+ border-left: 2px solid #a9a9a9;
+ border-top: 1px solid #fff;
+ border-right: 1px solid #fff;
+}
+.frame-header,
+.frame-art,
+.frame-type-line {
+ box-shadow: 
+ 0 0 0 2px #171314,
+ 0 0 0 5px #26714A,
+ -3px 3px 2px 5px #171314;
+margin-bottom: 7px;
+}
+.frame-text-box {
+ box-shadow: 
+ 0 0 0 5px #26714A,
+ -3px 3px 2px 5px #171314;
+}
+
+/*
+ — — — — — — — — — — — 
+ — — — — — — — — — — — 
+ OVERFLOW
+ — — — — — — — — — — — 
+ — — — — — — — — — — — 
+*/
+.frame-header,
+.frame-type-line,
+.frame-text-box {
+ overflow: hidden;
+}
+
+.frame-header,
+.frame-type-line {
+ background: 
+ linear-gradient( 0deg, rgba(201, 216, 201, .3), rgba(201, 216, 209, .3) ), 
+ url(https://image.ibb.co/jKByZn/tile_bg_1.jpg); 
+ display: flex;
+ margin-top: 10px;
+ margin-left: 5px;
+ margin-right: 5px;
+ padding: 8px 0;
+ display: flex;
+ justify-content: space-between;
+ border-radius: 18px/40px;
+}
+
+.name,
+.type {
+ font-size: 1.3em;
+ margin-left: 10px;
+ align-self: baseline;
+ font-weight: 600;
+ margin-top: 8px;
+}
+
+.superTrunfo {
+  color: rgb(154, 152, 32);
+  border-radius: 10%;
+  margin-right: 10px;
+}
+
+.centerImage {
+  display: block;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    /* border: 2px solid red;
+  height: 200px;
+  overflow: hidden;
+  resize: both;
+  width: 300px; */
+}
+
+/* .centerImage img {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+} */
+
+
+.frame-art {
+  height: 50%; /* make it fit in the card */
+  margin: 0 10px; /* align it vertically */
+  max-width:250px;
+  max-height:200px;
+  /* width: auto;
+  height: auto; */
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+ }
+
+ /* .frame-type-line {
+  margin-top: 0;
+ } */
+
+ .frame-text-box {
+  margin: 0 10px;
+  background: #d3ded6;
+  background-image: url(https://image.ibb.co/dFcNx7/tile_bg_2.jpg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+  padding: 50px 6px;
+  box-sizing: border-box;
+  font-size: 1.2em;
+ }
+
+ .flavour-text {
+  font-style: italic;
+  padding: 10px 0;
+ }
+
+ p {
+  margin-bottom: 5px;
+ }
+ .ftb-inner-margin {
+  margin: 5px 1px;
+ }
+
+ .frame-bottom-info {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 15px 0 15px; 
+ }
+
+ .fbi-left {
+  flex: 1;
+ } 
+ .fbi-left p:first-of-type {
+  margin-bottom: 1px;
+ }
+ .fbi-right {
+  flex: 1;
+  text-align: right;
+ }
+ .fbi-left,
+ .fbi-right {
+  font-size: 10px;
+  position: relative;
+  top: 6px;
+ }
+
+ .fbi-center {
+  margin-right: 20px;
+  text-align: center;
+  color: #171314;
+  font-weight: 950;
+  border-radius: 60%;
+  flex-basis: 75px;
+  height: 45px;
+  position: relative;
+  bottom: 21px;
+  z-index: 2;
+  background: lightgray;
+  background-image: url(https://miro.medium.com/max/120/1*UOd3_QY9md2Oxa7qMuav8w.jpeg);
+  box-shadow: 
+  0 0 0 4px #171314;
+ }
+ 
+ .card-background {
+  /* background-image: url(https://miro.medium.com/max/530/1*6MjfHcPfdCt4ofG_5IMV9A.jpeg); */
+  background-color: #622512;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+
+ #normal {
+  background-color: #cdd277;
+ }
+
+ #raro {
+  background-color: #126239;
+ }
+
+ #muito {
+  background-color: #622512;
+ }

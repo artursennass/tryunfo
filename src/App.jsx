@@ -3,6 +3,9 @@ import Form from './components/Form';
 import Card from './components/Card';
 import SearchForm from './components/SearchForm';
 import DeckCompiler from './components/DeckCompiler';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import MagicCard from './components/MagicCard';
+// import './index.css';
 
 class App extends React.Component {
   constructor() {
@@ -20,7 +23,6 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       saveButtonClickArray: [],
-      // saveButtonClickArrayFiltered: [],
       searchByName: '',
       searchByRarity: '',
       searchSuper: false,
@@ -97,7 +99,6 @@ class App extends React.Component {
 
     this.setState((prevState) => ({
       saveButtonClickArray: [...prevState.saveButtonClickArray, currentCardObj],
-      saveButtonClickArrayFiltered: [...prevState.saveButtonClickArray, currentCardObj],
     }), () => this.setState({
       cardName: '',
       cardDescription: '',
@@ -117,48 +118,6 @@ class App extends React.Component {
       });
     }
   }
-
-  // filterSaveButtonClickArray = () => {
-  //   const { saveButtonClickArray,
-  //     saveButtonClickArrayFiltered,
-  //     searchByName,
-  //     searchByRarity,
-  //     searchSuper } = this.state;
-
-  //   // console.log(saveButtonClickArrayFiltered);
-  //   // ajuda de guydoo e hugo leonardo
-  //   const filteredSaveButtonClickArrayByName = saveButtonClickArrayFiltered
-  //     .filter((e) => ((searchByName.length === 0)
-  //       ? true : e.cardName.includes(searchByName)));
-
-  //   const filteredSaveButtonClickArrayByRare = filteredSaveButtonClickArrayByName
-  //     .filter((e) => e.cardRare === searchByRarity);
-
-  //   const filteredSaveButtonClickArraySuper = saveButtonClickArrayFiltered
-  //     .filter((e) => e.cardTrunfo === true);
-
-  //   if (searchSuper) {
-  //     this.setState({
-  //       saveButtonClickArrayFiltered: filteredSaveButtonClickArraySuper,
-  //     });
-  //     return;
-  //   }
-  //   if (searchByRarity === 'todas') {
-  //     if (searchByName.length > 0) {
-  //       this.setState({
-  //         saveButtonClickArrayFiltered: filteredSaveButtonClickArrayByName,
-  //       });
-  //       return;
-  //     }
-  //     this.setState({
-  //       saveButtonClickArrayFiltered: saveButtonClickArray,
-  //     });
-  //     return;
-  //   }
-  //   this.setState({
-  //     saveButtonClickArrayFiltered: filteredSaveButtonClickArrayByRare,
-  //   });
-  // }
 
   delThisCard = (thisCardName, thisCardDesc, isTrunfo) => {
     const { saveButtonClickArray } = this.state;
@@ -182,8 +141,6 @@ class App extends React.Component {
       searchByRarity,
       searchSuper } = this.state;
 
-    console.log(searchSuper);
-
     const filteredSaveButtonClickArray = saveButtonClickArray
       .filter((e) => (searchSuper
         ? e.cardTrunfo === true : true))
@@ -191,6 +148,7 @@ class App extends React.Component {
         ? true : e.cardName.includes(searchByName)))
       .filter((e) => (searchByRarity === 'todas' || searchByRarity === ''
         ? true : e.cardRare === searchByRarity));
+    // ajuda de guydoo e hugo leonardo
 
     return (
       <div>
@@ -214,11 +172,28 @@ class App extends React.Component {
             searchByRarity={ searchByRarity }
             searchSuper={ searchSuper }
           />
-          <DeckCompiler filteredSaveButtonClickArray={ filteredSaveButtonClickArray } />
+          <DeckCompiler
+            filteredSaveButtonClickArray={ filteredSaveButtonClickArray }
+            delThisCard={ this.delThisCard }
+          />
         </section>
+        {/* <section>
+          <MagicCard
+            cardName="Atanarón Formen"
+            cardDescription="Um cara Muito legal"
+            cardAttr1="90"
+            cardAttr2="30"
+            cardAttr3="55"
+            cardImage="https://c4.wallpaperflare.com/wallpaper/125/323/619/art-artwork-fantasy-mage-wallpaper-preview.jpg"
+            cardRare="muito raro"
+            cardTrunfo
+          />
+        </section> */}
       </div>
     );
   }
 }
 
 export default App;
+
+// https://cdn.discordapp.com/attachments/540615561751822346/578995697987092482/goliath20.png

@@ -30,7 +30,6 @@ export default class SearchForm extends Component {
             name="searchByRarity"
             id="searchByRarity"
             data-testid="rare-filter"
-            // defaultValue="todas"
             value={ searchByRarity }
             onChange={ onInputChange }
             disabled={ searchSuper }

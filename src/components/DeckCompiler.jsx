@@ -4,7 +4,8 @@ import Card from './Card';
 
 export default class DeckCompiler extends Component {
   render() {
-    const { filteredSaveButtonClickArray } = this.props;
+    const { filteredSaveButtonClickArray,
+      delThisCard } = this.props;
 
     return (
       <div>
@@ -17,7 +18,7 @@ export default class DeckCompiler extends Component {
                 type="button"
                 data-testid="delete-button"
                 onClick={
-                  () => this.delThisCard(e.cardName, e.cardDescription, e.cardTrunfo)
+                  () => delThisCard(e.cardName, e.cardDescription, e.cardTrunfo)
                 }
               // essa estrutura de usar uma função anonima dentro do onClick eu peguei em: https://stackoverflow.com/questions/37387351/reactjs-warning-setstate-cannot-update-during-an-existing-state-transiti
               >
@@ -33,4 +34,5 @@ export default class DeckCompiler extends Component {
 
 DeckCompiler.propTypes = {
   filteredSaveButtonClickArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  delThisCard: PropTypes.func.isRequired,
 };

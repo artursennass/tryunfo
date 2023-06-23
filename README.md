@@ -1,13 +1,68 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Tryunfo
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Este é o repositório oficial do projeto Tryunfo, um jogo baseado no jogo "Trunfo" e desenvolvido com o uso do framework React em JavaScript. O objetivo da aplicação é permitir aos jogadores montar um deck personalizado de trunfo com base no universo do jogo "Magic: The Gathering". Feito como estudo na escola de programação [Trybe](https://www.betrybe.com/).
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+
+## Funcionalidades
+
+- Criar cartas personalizadas
+- Definir características de cada carta como raridade, mana, etc
+- Encontrar e organizar cartas já criadas
+
+## Tecnologias utilizadas
+
+- HTML
+- CSS
+- JavaScript
+- React.js
+- Jest
+
+
+## Instalação
+
+1. Clone este repositório:
+
+   ```bash
+   git clone https://github.com/artursennass/tryunfo.git
+   ```
+
+2. Acesse o diretório do projeto:
+
+   ```bash
+   cd tryunfo
+   ```
+3. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+
+## Uso
+
+1. Inicie o servidor:
+
+   ```bash
+   npm start
+   ```
+
+2. Acesse o jogo no seu navegador:
+
+   ```
+   http://localhost:3000
+   ```
+
+
+## Contribuição
+1. Faça um fork do projeto
+2. Crie uma branch para sua contribuição (git checkout -b feature/nova-funcionalidade)
+3. Faça commit das suas alterações (git commit -am 'Adiciona nova funcionalidade')
+4. Faça push para a branch (git push origin feature/nova-funcionalidade)
+5. Abra um Pull Request
+
+
+## Contato
+Artur Senna
+Email: artursennass@gmail.com
+LinkedIn: [Artur Senna](https://www.linkedin.com/in/artur-senna/)
+

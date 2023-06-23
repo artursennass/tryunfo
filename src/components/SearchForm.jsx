@@ -9,8 +9,8 @@ export default class SearchForm extends Component {
       searchSuper } = this.props;
 
     return (
-      <form>
-        Filtros de busca
+      <form className="search-form">
+        Encontre sua carta:
         <br />
         <label htmlFor="searchByName">
           <input
@@ -22,6 +22,7 @@ export default class SearchForm extends Component {
             value={ searchByName }
             onChange={ onInputChange }
             disabled={ searchSuper }
+            className="search-by-name"
           />
         </label>
         <br />
@@ -33,6 +34,7 @@ export default class SearchForm extends Component {
             value={ searchByRarity }
             onChange={ onInputChange }
             disabled={ searchSuper }
+            className="search-by-rarity"
           >
             <option value="todas">Todas</option>
             <option value="normal">Normal</option>
@@ -49,7 +51,9 @@ export default class SearchForm extends Component {
             data-testid="trunfo-filter"
             value={ searchSuper }
             onChange={ onInputChange }
+            // className="input"
           />
+          {' '}
           Super Trybe Trunfo
         </label>
       </form>

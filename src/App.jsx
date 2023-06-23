@@ -1,10 +1,10 @@
 import React from 'react';
 import Form from './components/Form';
-import Card from './components/Card';
+// import Card from './components/Card';
 import SearchForm from './components/SearchForm';
 import DeckCompiler from './components/DeckCompiler';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import MagicCard from './components/MagicCard';
+import MagicCard from './components/MagicCard';
 // import './index.css';
 
 class App extends React.Component {
@@ -26,6 +26,7 @@ class App extends React.Component {
       searchByName: '',
       searchByRarity: '',
       searchSuper: false,
+      remainingPoints: '210',
     };
   }
 
@@ -64,13 +65,34 @@ class App extends React.Component {
     }
   }
 
+  trackingRemainingPoints = () => {
+    const { cardAttr1,
+      cardAttr2,
+      cardAttr3 } = this.state;
+
+    const totalOfPoints = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+    const totalAmountOfPoints = 210;
+    const newAmountOfPoints = totalAmountOfPoints - totalOfPoints;
+
+    // console.log(value);
+
+    this.setState({
+      remainingPoints: newAmountOfPoints,
+    });
+  }
+
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
     this.setState({
       [name]: value,
-    }, () => this.enableSaveButton());
+    }, () => {
+      this.enableSaveButton();
+      if (name.includes('cardAttr')) {
+        this.trackingRemainingPoints();
+      }
+    });
   }
 
   onSaveButtonClick = (event) => {
@@ -151,30 +173,35 @@ class App extends React.Component {
     // ajuda de guydoo e hugo leonardo
 
     return (
-      <div>
-        <header>
-          <h1>Tryunfo</h1>
+      <div className="body-content">
+        <header className="header">
+          <h1 className="header-title">Tryunfo</h1>
         </header>
-        <section>
+        <main className="main">
           <Form
             { ...this.state }
             onInputChange={ this.onInputChange }
             onSaveButtonClick={ this.onSaveButtonClick }
           />
-          <h2>Cartas do baralho:</h2>
-          <Card { ...this.state } />
-        </section>
-        <section>
-          <h2>Baralho Atual:</h2>
-          <SearchForm
-            onInputChange={ this.onInputChange }
-            searchByName={ searchByName }
-            searchByRarity={ searchByRarity }
-            searchSuper={ searchSuper }
-          />
+          <div className="preview-card">
+            <h2>Nova carta do baralho</h2>
+            <MagicCard { ...this.state } />
+          </div>
+        </main>
+        <section className="deck-section">
+          <div className="search-form-div">
+            <h2>Baralho Atual</h2>
+            <SearchForm
+              onInputChange={ this.onInputChange }
+              searchByName={ searchByName }
+              searchByRarity={ searchByRarity }
+              searchSuper={ searchSuper }
+            />
+          </div>
           <DeckCompiler
             filteredSaveButtonClickArray={ filteredSaveButtonClickArray }
             delThisCard={ this.delThisCard }
+
           />
         </section>
         {/* <section>
@@ -189,6 +216,10 @@ class App extends React.Component {
             cardTrunfo
           />
         </section> */}
+        <footer className="footer">
+          <h3>Produzido por Artur Senna</h3>
+          <p>Projeto Tryunfo, Curso Trybe</p>
+        </footer>
       </div>
     );
   }

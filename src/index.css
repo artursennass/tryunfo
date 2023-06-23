@@ -24,6 +24,134 @@ code {
     monospace;
 }
 
+.body-content {
+ display: flex;
+ flex-direction: column;
+ /* background-color: rgb(122, 110, 110); */
+ background-image: url(https://i.imgur.com/0RVH3l2.png);
+ background-repeat: no-repeat;
+background-size: cover;
+}
+
+.header {
+  /* position: fixed; */
+  padding: 70px;
+  /* border: solid 2px red; */
+  width: 100%;
+  background-image: url(./images/header-image.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position-y: center;
+}
+
+.header-title {
+  color: rgb(158, 157, 157);
+  margin-left: 50px;
+  font-size: 80px;
+}
+
+.main {
+  padding: 10px;
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-around;
+  align-items: center;
+  /* border: solid 2px red; */
+}
+
+.main-form {
+  display: flex;
+  flex-direction: column;
+  /* border: solid 2px red; */
+  color: antiquewhite;
+  font-size: large;
+}
+
+.textarea {
+  margin-left: 0px;
+  background-color: #171314;
+  color: antiquewhite;
+  resize: none;
+}
+
+.input {
+  margin-left: 15px;
+  background-color: #171314;
+  color: antiquewhite;
+}
+
+.preview-card h2 {
+  color: antiquewhite;
+}
+
+.deck-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form-div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+}
+
+.deck-section h2 {
+  color: antiquewhite;
+}
+
+.deck-compiler {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-form {
+  color: antiquewhite;
+}
+
+.search-by-name {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: #171314;
+  color: antiquewhite;
+}
+
+.search-by-rarity {
+  margin-bottom: 10px;
+  background-color: #171314;
+  color: antiquewhite;
+}
+
+.deck-card-div {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.exclude {
+  /* padding-left: 20px;
+  padding-right: 100px; */
+  margin: 10px;
+  align-self: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 70px;
+  /* border: solid 2px red; */
+  background-image: url(./images/footer-image.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position-y: center;
+  color: rgb(158, 157, 157);
+}
+
+/* todo esse estili abaixo é para o card. Foi modificado a partir dessa referência: https://codeburst.io/make-a-magic-the-gathering-card-in-css-5e4e06a5e604 */
 .card-container {
   border: 1px solid black;
   width: 500px;
@@ -121,7 +249,8 @@ margin-bottom: 7px;
 }
 
 .superTrunfo {
-  color: rgb(154, 152, 32);
+  color: rgb(175, 45, 103);
+  font-weight: 901;
   border-radius: 10%;
   margin-right: 10px;
 }
@@ -178,7 +307,12 @@ margin-bottom: 7px;
   font-size: 1.2em;
  }
 
+ .description {
+  overflow-wrap: break-word;
+ }
+
  .flavour-text {
+  font-size: 16px;
   font-style: italic;
   padding: 10px 0;
  }

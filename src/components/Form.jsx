@@ -15,6 +15,7 @@ export default class Form extends Component {
             data-testid="trunfo-input"
             checked={ cardTrunfo }
             onChange={ onInputChange }
+            className="input"
           />
           Super Trybe Trunfo
         </label>);
@@ -34,10 +35,14 @@ export default class Form extends Component {
         isSaveButtonDisabled,
         onInputChange,
         onSaveButtonClick,
+        remainingPoints,
       } = this.props;
 
       return (
-        <form action="">
+        <form
+          action=""
+          className="main-form"
+        >
           <label htmlFor="name">
             Nome:
             <input
@@ -48,12 +53,13 @@ export default class Form extends Component {
               data-testid="name-input"
               value={ cardName }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
           <br />
           <label htmlFor="description">
-            Descrição:
+            Descrição da carta:
             <br />
             <textarea
               name="cardDescription"
@@ -63,12 +69,13 @@ export default class Form extends Component {
               data-testid="description-input"
               onChange={ onInputChange }
               value={ cardDescription }
+              className="textarea"
             />
           </label>
 
           <br />
           <label htmlFor="attr01">
-            Attr01
+            Mana
             <input
               type="number"
               id="attr01"
@@ -76,12 +83,13 @@ export default class Form extends Component {
               data-testid="attr1-input"
               value={ cardAttr1 }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
           <br />
           <label htmlFor="attr02">
-            Attr02
+            Atk
             <input
               type="number"
               id="attr02"
@@ -89,11 +97,12 @@ export default class Form extends Component {
               data-testid="attr2-input"
               value={ cardAttr2 }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
           <br />
           <label htmlFor="attr03">
-            Attr03
+            Def
             <input
               type="number"
               id="attr03"
@@ -101,13 +110,25 @@ export default class Form extends Component {
               data-testid="attr3-input"
               value={ cardAttr3 }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
           <br />
-          <p>Pontos restantes = </p>
+          <p>
+            Pontos restantes =
+            {' '}
+            { remainingPoints }
+          </p>
+          <p>
+            Cada atributo
+            {' '}
+            {'->'}
+            {' '}
+            máximo 90 pontos.
+          </p>
           <br />
           <label htmlFor="image">
-            Imagem
+            Imagem (URL)
             <input
               type="text"
               name="cardImage"
@@ -115,6 +136,7 @@ export default class Form extends Component {
               data-testid="image-input"
               value={ cardImage }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
           <br />
@@ -126,6 +148,7 @@ export default class Form extends Component {
               data-testid="rare-input"
               value={ cardRare }
               onChange={ onInputChange }
+              className="input"
             >
               <option value="normal">Normal</option>
               <option value="raro">Raro</option>
@@ -140,6 +163,7 @@ export default class Form extends Component {
             data-testid="save-button"
             disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
+            className="input btn btn-secondary"
           >
             Salvar
           </button>
@@ -161,4 +185,5 @@ Form.propTypes = {
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
+  remainingPoints: PropTypes.string.isRequired,
 };
